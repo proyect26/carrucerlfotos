@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Imágenes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="music-button" onclick="toggleMusic()">🎵</button>
+    <div class="text-container">
+        <span style="--index: 0;">Si</span>
+        <span style="--index: 1;">la</span>
+        <span style="--index: 2;">belleza</span>
+        <span style="--index: 3;">fuera</span>
+        <span style="--index: 4;">tiempo</span>,
+        <span style="--index: 5;">tú</span>
+        <span style="--index: 6;">serías</span>
+        <span style="--index: 7;">eternidad</span>. 💖
+    </div>
+    <div class="counter">Gracias por existir</div>
+    <div class="gallery">
+        <div class="image-container">
+            <img src="fotos/123.jpeg" alt="Imagen 1" class="gallery-image active">
+            <img src="fotos/Fondos-de-pantalla-de-Parejas-Enamoradas-23.jpg" alt="Imagen 2" class="gallery-image">
+            <img src="fotos/OIP.jpeg" alt="Imagen 3" class="gallery-image">
+            <img src="fotos/parejas tumblr.JPG" alt="Imagen 4" class="gallery-image">
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        let music = new Audio('music/ytmp3free.cc_nanpa-basico-quiereme-asi-video-oficial-youtubemp3free.org.mp3');
+
+        function toggleMusic() {
+            if (music.paused) {
+                music.play();
+            } else {
+                music.pause();
+            }
+        }
+
+        // Agregar animación de aparición palabra por palabra
+        document.addEventListener('DOMContentLoaded', () => {
+            const words = document.querySelectorAll('.text-container span');
+            words.forEach((word, index) => {
+                word.style.animationDelay = `${index * 0.5}s`; /* Retraso progresivo */
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,246 @@
+body {
+    display: flex;
+    flex-direction: column; /* Cambiar a diseño vertical */
+    justify-content: flex-start; /* Alinear elementos al inicio */
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #121212; /* Fondo negro */
+    color: #ffffff; /* Cambiar el color del texto a blanco */
+    font-family: 'Times New Roman', Times, serif; /* Cambiar a Times New Roman */
+    padding: 10px; /* Espaciado interno */
+}
+
+.text-container {
+    flex: 1;
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    flex-wrap: wrap; /* Permitir que las palabras se ajusten en varias filas */
+    margin: 0; /* Eliminar margen inferior */
+    text-align: center;
+    font-size: 1.2em; /* Reducir tamaño del texto para móviles */
+    font-weight: bold;
+    color: #ffffff; /* Cambiar el color del texto a blanco */
+    font-family: 'Times New Roman', Times, serif; /* Cambiar a Times New Roman */
+    padding: 10px; /* Espaciado interno */
+    line-height: 1; /* Reducir el espaciado entre filas */
+    max-width: 80%; /* Reducir el ancho máximo para centrar más */
+    word-wrap: break-word; /* Permitir que el texto se ajuste si es muy largo */
+    background: linear-gradient(145deg, #e6e6e6, #ffffff); /* Fondo de espejo */
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.2), 0 3px 5px rgba(0, 0, 0, 0.2); /* Efecto de profundidad */
+    border-radius: 10px; /* Bordes redondeados */
+    border: 1px solid #cccccc; /* Borde del cuadro */
+    position: relative; /* Para posicionar las "pegatinas" */
+    overflow: hidden; /* Ocultar contenido que se desborde */
+    height: 100%; /* Usar toda la altura disponible */
+    animation: none; /* Desactivar animación global del contenedor */
+}
+
+.text-container::before {
+    content: ''; /* Efecto de brillo en el espejo */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+    border-radius: 10px;
+    z-index: 1;
+    pointer-events: none; /* Ignorar interacciones */
+}
+
+.text-container span {
+    position: relative;
+    z-index: 2; /* Asegurar que las letras estén encima del brillo */
+    display: inline-block;
+    transform: rotate(0deg); /* Sin rotación para que las palabras estén alineadas */
+    background: none; /* Sin fondo para las palabras */
+    padding: 0 5px; /* Reducir espaciado interno */
+    margin: 0 2px; /* Reducir el espaciado entre palabras */
+    font-size: 1.1em; /* Ajustar ligeramente el tamaño de las letras */
+    animation: fade-in-word 5s ease-in-out infinite; /* Animación para cada palabra */
+    animation-delay: calc(var(--index) * 0.5s); /* Retraso progresivo basado en el índice */
+    opacity: 0; /* Ocultar inicialmente */
+    white-space: nowrap; /* Evitar que las palabras se dividan */
+}
+
+/* Animación para que las palabras aparezcan una a una y luego el título permanezca visible */
+@keyframes fade-in-word {
+    0% {
+        opacity: 0;
+        transform: translateY(10px); /* Desplazar hacia abajo inicialmente */
+    }
+    20% {
+        opacity: 1;
+        transform: translateY(0); /* Volver a la posición original */
+    }
+    80% {
+        opacity: 1;
+        transform: translateY(0); /* Mantener visible */
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-10px); /* Desplazar hacia arriba al desaparecer */
+    }
+}
+
+/* Colores alternativos para las palabras */
+.text-container span:nth-child(odd) {
+    color: #ff6f61; /* Rojo */
+}
+
+.text-container span:nth-child(even) {
+    color: #4caf50; /* Verde */
+}
+
+.gallery {
+    flex: 1;
+    width: 100%; /* Usar todo el ancho disponible */
+    max-width: 400px; /* Limitar el ancho en móviles */
+    margin-left: auto;
+    position: relative;
+    background-color: #1e1e1e; /* Fondo oscuro */
+    border-radius: 15px; /* Bordes redondeados */
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.8); /* Sombra */
+    padding: 0; /* Eliminar padding */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px; /* Agregar margen superior */
+    margin-bottom: 160px; /* Separar del borde inferior */
+    transition: transform 0.5s ease, height 0.5s ease; /* Transición para el efecto de crecimiento */
+}
+
+.gallery.active {
+    transform: scale(1.1); /* Efecto de crecimiento */
+}
+
+.counter {
+    position: static; /* Cambiar a posición estática para que se alinee con el flujo del documento */
+    margin-top: 10px; /* Agregar margen superior para separar del título */
+    font-size: 1.2em; /* Reducir tamaño del texto para móviles */
+    font-weight: bold;
+    color: #ffffff; /* Cambiar a blanco */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Sombra para mejor visibilidad */
+    padding: 5px 10px; /* Agregar espacio interno */
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para contraste */
+    border-radius: 10px; /* Bordes redondeados */
+    max-width: 90%; /* Limitar el ancho del texto */
+    text-align: center; /* Centrar el texto */
+    box-sizing: border-box; /* Incluir padding en el tamaño */
+    z-index: 2; /* Asegurar que esté encima del cuadro negro */
+    transition: transform 0.5s ease, opacity 0.5s ease; /* Transición para el efecto */
+}
+
+.counter.active {
+    transform: scale(1.1); /* Efecto de crecimiento */
+    opacity: 1; /* Asegurar visibilidad */
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 350px; /* Aumentar la altura del cuadro negro */
+    overflow: hidden; /* Ocultar desbordamiento */
+    position: relative;
+    gap: 10px; /* Espaciado entre imágenes */
+    background-color: #000; /* Fondo negro para contraste */
+    border-radius: 15px; /* Bordes redondeados */
+    z-index: 1; /* Asegurar que esté detrás de las letras */
+}
+
+.image-container.active {
+    transform: scale(1.1); /* Efecto de crecimiento */
+}
+
+.gallery-image {
+    width: 80%; /* Reducir el ancho de las imágenes */
+    height: auto; /* Ajustar altura automáticamente */
+    position: absolute;
+    opacity: 0; /* Ocultar imágenes por defecto */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Transiciones suaves */
+    transform: scale(0.8); /* Escalado inicial más pequeño */
+}
+
+.gallery-image.active {
+    opacity: 1; /* Mostrar la imagen activa */
+    transform: scale(0.9); /* Imagen activa ligeramente más grande */
+    z-index: 2; /* Asegurar que esté encima */
+}
+
+.gallery-image.previous {
+    opacity: 0.5; /* Imagen anterior desvanecida */
+    transform: translateX(-100%); /* Mover a la izquierda */
+    z-index: 1;
+}
+
+.gallery-image.next {
+    opacity: 0.5; /* Imagen siguiente desvanecida */
+    transform: translateX(100%); /* Mover a la derecha */
+    z-index: 1;
+}
+
+.controls {
+    display: none; /* Ocultar controles de flechas */
+}
+
+.gallery-image:hover {
+    transform: scale(1.02); /* Efecto de zoom ligero al pasar el mouse */
+}
+
+.music-controls {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Espaciado entre elementos */
+}
+
+.music-controls label {
+    font-size: 1.5em; /* Texto más grande */
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Sombra en el texto */
+}
+
+.music-controls input {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    border: 2px solid #fff; /* Borde blanco */
+    border-radius: 5px;
+    background-color: #444; /* Fondo oscuro */
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.music-controls input:hover {
+    background-color: #666; /* Fondo más claro al pasar el mouse */
+    transform: scale(1.1); /* Efecto de agrandamiento */
+}
+
+.music-button {
+    position: fixed; /* Fijar posición */
+    top: 10px;
+    right: 10px;
+    background-color: #ffcc00; /* Amarillo brillante */
+    border: 2px solid #fff;
+    color: #000; /* Texto negro */
+    padding: 10px 15px;
+    border-radius: 50%; /* Forma circular */
+    cursor: pointer;
+    font-size: 1.2em; /* Reducir tamaño */
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    box-shadow: 0 5px 15px rgba(255, 204, 0, 0.5);
+    z-index: 1000; /* Asegurar que esté por encima de otros elementos */
+}
+
+.music-button:hover {
+    background-color: #ff6f61; /* Cambiar a rojo al pasar el mouse */
+    transform: scale(1.1); /* Reducir efecto de agrandamiento */
+    box-shadow: 0 10px 30px rgba(255, 111, 97, 0.7);
+}
